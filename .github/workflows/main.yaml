@@ -1,4 +1,4 @@
-name: Ruby
+name: Integration specs
 
 on: [push]
 
@@ -8,5 +8,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Integration specs
+    - name: Prepare postgres database
+      run: RAILS_ENV=test docker-compose run web rails db:create db:migrate
+    - name: Run integration specs
       run: docker-compose up --build test
