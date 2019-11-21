@@ -11,6 +11,6 @@ jobs:
     - name: Build Docker images
       run: docker-compose build
     - name: Prepare Postgres database
-      run: RAILS_ENV=test docker-compose run web rails db:create db:migrate
+      run: docker-compose run web RAILS_ENV=test bundle exec rails db:create db:migrate
     - name: Run integration specs
       run: docker-compose run test
