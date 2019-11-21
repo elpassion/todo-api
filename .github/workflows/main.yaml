@@ -8,7 +8,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Prepare postgres database
+    - name: Build Docker images
+      run: docker-compose build
+    - name: Prepare Postgres database
       run: RAILS_ENV=test docker-compose run web rails db:create db:migrate
     - name: Run integration specs
-      run: docker-compose up --build test
+      run: docker-compose run test
