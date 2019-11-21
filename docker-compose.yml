@@ -35,6 +35,8 @@ services:
       - API_HOST=http://web:3000
       - SELENIUM=http://selenium-hub:4444
       - DOCKERIZED=true
+    env_file:
+      - .env.test
     depends_on:
       - web
       - chrome
