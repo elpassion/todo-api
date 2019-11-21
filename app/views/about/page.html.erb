@@ -1,0 +1,11 @@
+<h1>About</h1>
+<ul class="about">
+  <li> Added by Rails
+<ul>
+
+<%= javascript_tag do %>
+  var list = document.createElement("li");
+  var list_item = document.createTextNode("Created with JavaScript");
+  list.appendChild(list_item);
+  document.querySelector(".about").appendChild(list);
+<% end %>

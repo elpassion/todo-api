@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'GET /welcome', type: :request do
+RSpec.describe 'GET /welcome' do
   subject(:get_welcome) { get '/welcome'; response }
 
   it { is_expected.to have_http_status(200) }
