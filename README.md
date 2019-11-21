@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Setup dockerized application
+## Create Postgres database
+`docker-compose run web rails db:setup`
 
-Things you may want to cover:
+## Migrate Postgres databse
+`docker-compose run web rails db:migrate`
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Run dockerized specs
+`docker-compose up --build test`
