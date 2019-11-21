@@ -1,0 +1,34 @@
+version: '3'
+services:
+  web:
+    environment:
+      - DATABASE_URL=postgresql://postgres@db/todo-api
+      - DOCKERIZED=true
+    build: .
+    command: bundle exec rails server --port 3000 --binding 0.0.0.0
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    volumes:
+      - .:/myapp
+
+  db:
+    image: postgres:12.0
+
+  selenium:
+    image: selenium/standalone-chrome-debug:3.141
+    ports: ['4444:4444', '5900:5900']
+    logging:
+      driver: none
+
+  test:
+    build: .
+    command: bundle exec rspec
+    environment:
+      - DATABASE_URL=postgresql://postgres@db/todo-api_test
+      - API_HOST=http://web:3000
+      - SELENIUM=http://selenium:4444
+    depends_on:
+      - web
+      - selenium
