@@ -30,7 +30,15 @@ services:
 
   test:
     build: .
-    command: bundle exec rspec
+    command: bundle exec rspec --exclude-pattern spec/features/*
+    env_file:
+      - .env.test
+    depends_on:
+      - web
+
+  integration_test:
+    build: .
+    command: bundle exec rspec spec/features/*
     environment:
       - API_HOST=http://web:3000
       - SELENIUM=http://selenium-hub:4444
