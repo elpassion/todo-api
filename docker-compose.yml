@@ -38,7 +38,7 @@ services:
 
   integration_test:
     build: .
-    command: bundle exec rspec spec/features/*
+    command: bundle exec rspec spec/features
     environment:
       - API_HOST=http://web:3000
       - SELENIUM=http://selenium-hub:4444
