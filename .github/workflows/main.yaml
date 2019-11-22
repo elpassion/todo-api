@@ -10,9 +10,11 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build Docker images
       run: docker-compose build
-    - name: Prepare Postgres database
+    - name: Prepare Postgres for unit tests
       run: docker-compose run test bundle exec rails db:create db:migrate
-    - name: Run non-integration specs
+    - name: Run unit test
       run: docker-compose run test
+    - name: Prepare Postgres for integration tests
+      run: docker-compose run web bundle exec rails db:create db:migrate
     - name: Run integration specs
       run: docker-compose run integration_test
